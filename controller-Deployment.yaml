@@ -1,0 +1,58 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: rabbitmq-controller-clusterrole
+rules:
+- apiGroups: [""]
+  resources: ["pods"]
+  verbs: ["get", "list", "watch"]
+- apiGroups: [""]
+  resources: ["services"]
+  verbs: ["get", "update"]
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: rabbitmq-controller-clusterrolebinding
+subjects:
+- kind: ServiceAccount
+  name: rabbitmq
+  namespace: us
+roleRef:
+  kind: ClusterRole
+  name: rabbitmq-controller-clusterrole
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rabbitmq-controller
+  namespace: us
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rabbitmq-controller
+  template:
+    metadata:
+      labels:
+        app: rabbitmq-controller
+    spec:
+      serviceAccountName: rabbitmq
+      containers:
+      - name: rabbitmq-controller
+        image: novastar-registry.cn-hangzhou.cr.aliyuncs.com/novacloud/nova-rabbitmq-controller:v1.3
+        env:
+        - name: KUBERNETES_SERVICE_HOST
+          value: "kubernetes.default.svc"
+        - name: KUBERNETES_SERVICE_PORT
+          value: "443"
+        volumeMounts:
+        - name: config-volume
+          mountPath: /root/config.json
+          subPath: config.json
+      volumes:
+      - name: config-volume
+        configMap:
+          name: rabbitmq-controller-config

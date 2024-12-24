@@ -1,0 +1,8 @@
+{
+    "namespace": "us",
+    "serviceName": "vnnox-rabbitmq",
+    "primaryLabelValue": "us-rabbitmq",
+    "standbyLabelValue": "us-rabbitmq-standby", 
+    "labelKey": "app.kubernetes.io/instance",
+    "wecomWebhook": "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=??"
+} 
