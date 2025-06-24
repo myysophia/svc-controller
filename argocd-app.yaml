@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: au-rabbitmq-standby
+spec:
+  destination:
+    name: ''
+    namespace: au
+    server: >-
+      XX
+  source:
+    path: aws-in/rabbitmq
+    repoURL: XX
+    targetRevision: EKS
+    helm:
+      valueFiles:
+        - values-aws.yaml
+  sources: []
+  project: default
