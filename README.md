@@ -4,6 +4,9 @@
 
 `svc-controller` 是一个用于 Kubernetes 集群中服务主备切换的控制器。它定期检测主实例（primary pod）的健康状况，当主实例不可用时自动将 Service 指向备用实例（standby pod），并通过企业微信机器人发送告警通知。
 
+![image](https://github.com/user-attachments/assets/b981464e-a7f4-4fc6-862f-29a687676c85)
+
+
 ## 功能特性
 
 - 监控指定命名空间下的主实例 Pod 健康状态
