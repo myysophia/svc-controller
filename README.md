@@ -6,6 +6,10 @@
 
 ![image](https://github.com/user-attachments/assets/b981464e-a7f4-4fc6-862f-29a687676c85)
 
+## 架构图
+
+![image](https://github.com/user-attachments/assets/5e95dfa9-7178-4626-b616-3d9f51089a90)
+
 
 ## 功能特性
 
